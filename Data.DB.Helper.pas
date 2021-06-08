@@ -24,9 +24,9 @@
 
 
 {
-  AlteraÁoes:
-      28/01/16 - Primeira vers„o publicada
-      29/01/16 - correÁ„o DoLoopEvent;
+  Altera√ßoes:
+      28/01/16 - Primeira vers√£o publicada
+      29/01/16 - corre√ß√£o DoLoopEvent;
 
 }
 
@@ -333,7 +333,7 @@ begin
   o := TJSON.Parse(sJson);
 
   if o.Contains('result') = false then
-    raise exception.Create('N„o possui tag "result" no json');
+    raise exception.Create('N√£o possui tag "result" no json');
 
   o.TryGetValue<TJSONArray>('result', A);
 
@@ -589,6 +589,8 @@ begin
         AJSONObject.AddPair(key, it.AsWideString);
       ftString:
         AJSONObject.AddPair(key, it.AsString);
+      TFieldType.ftTime:                                                      // Sugest√£o para usar campo do tipo Hora.
+        AJSONObject.AddPair(key, FormatDateTime('hh:mm:ss', it.AsDateTime));
       TFieldType.ftDate:
         AJSONObject.AddPair(key, ISODateToString(it.AsDateTime));
       TFieldType.ftDateTime:
